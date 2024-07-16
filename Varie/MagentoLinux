@@ -1,0 +1,82 @@
+https://firebearstudio.com/blog/istruzioni-per-installazione-magento-2.html
+
+https://github.com/magento/magento2
+
+--------
+Composer
+--------
+
+    -   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+    -   php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+    -   php composer-setup.php
+
+    -   php -r "unlink('composer-setup.php');"
+
+    -   sudo mv composer.phar /usr/local/bin/composer
+
+        --  oppure  --
+
+    -   curl -sS https://getcomposer.org/installer | php
+    -   mv composer.phar /usr/local/bin/composer
+
+
+    -   composer --version
+
+--------------
+PHP extensions
+--------------
+
+    -   sudo apt-get install php-mysql
+    -   sudo apt-get install php-bcmath
+    -   sudo apt-get install php-gd
+    -   sudo apt-get install php-intl
+    -   sudo apt-get install php-zip
+
+    -   sudo apt-get install php-curl
+    -   sudo apt-get install php-soap
+
+------------------------
+Magento project creation
+------------------------
+
+    -   composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition <install-directory-name>
+
+--------------------------------------------------------------------------------------------------------------------------------
+Magento project installation    [ https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/composer.html ]  
+--------------------------------------------------------------------------------------------------------------------------------
+
+    -   bin/magento help setup:install
+    -   bin/magento setup:install
+
+    -   CREATE DATABASE <db_name>
+    -   sudo php bin/magento setup:install --base-url="test/" --db-host="localhost" --db-name="magentoTest" --db-user="root" --db-password="" --admin-firstname="test" --admin-lastname="test1" --admin-email="test@test.com" --admin-user="admin" --admin-password="admin123" --language="en_US" --currency="USD" --timezone="America/Chicago" --use-rewrites="1" --backend-frontname="admin"
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+Magento GitHub repo [ https://github.com/magento/magento2 ]
+-----------------------------------------------------------
+
+    -   cd <ROOT_MAGENTOPROJECT_DIR>
+    -   git clone https://github.com/magento/magento2.git
+
+------------------------
+permessi files & folders
+------------------------
+
+    -   ps -ef | grep apache2                       #   utente di server web
+    -   chown -R <utente_server_web>
+    -   find . -type d -exec chmod 700 {} \;        #   set permessi folders
+    -   find . -type f -exec chmod 600 {} \;        #   set permessi files
+
+
+
+
+

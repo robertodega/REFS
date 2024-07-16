@@ -1,0 +1,41 @@
+
+[ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account ]
+
+#   ------------------------------------
+#   Adding SSH key on remote GitHub repo
+#   ------------------------------------
+cd
+cd .ssh
+$ ls -al ~/.ssh                                     #   Check for existing SSH keys
+$ cat ~/.ssh/id_rsa.pub                             #   Read present public key content
+ssh-keygen                                          #   create new public key
+    or
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+from GitHub page 
+
+    >   create page
+
+    >   profile photo   >   settings    >   SSH and GPG keys
+            Click New SSH key or Add SSH key.
+            In the "Key" field, paste your public key.
+
+#   -----------------------------------
+#   First folder synchro initialization
+#   -----------------------------------
+cd <LOCAL_FOLDER>
+git init
+git clone <REMOTE_FOLDER>               #   i.e. git@github.com:robertodega/REFS.git
+git branch -M main                      #   same name as remote branch name
+git remote add origin <REMOTE_FOLDER>   #   remote branch link
+git pull origin main                    #   local-remote content align
+
+#   ----------------------------------------
+#   files update to merge with remote folder
+#   ----------------------------------------
+git add .
+git commit -m "COMMENT"
+git push --set-upstream origin main     #   first time push
+git push                                #   next push ( 'git push -u origin main' as well )
+
+

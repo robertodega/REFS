@@ -1,0 +1,13 @@
+-- da Xamp (/opt/lamp)  ->  mysql
+--  se 
+    Comando «mysql» non trovato, ma può essere installato con:
+
+    sudo apt install mysql-client-core-8.0     # version 8.0.25-0ubuntu0.20.04.1, or
+    sudo apt install mariadb-client-core-10.3  # version 1:10.3.29-0ubuntu0.20.04.1
+
+--  copiare il pwd (/opt/lampp/bin)
+--  cd
+--  nano .bashrc
+--  aggiungere export PATH=/opt/lampp/bin:$PATH => Save & Exit
+--  source .bashrc
+--  ora il comando mysql -u root è disponibile globalmente
