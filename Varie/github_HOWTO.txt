@@ -25,7 +25,8 @@ from GitHub page
 #   ----------------------------------------------
 cd <LOCAL_FOLDER>
 git init
-git remote add origin <REMOTE_FOLDER>                               #   remote branch link
+git checkout -b main                                                #   main branch name
+git remote add origin <REMOTE_FOLDER>                               #   remote branch link  #    i.e. git@github.com:robertodega/DEV.git
 
 #   ---------------------------------------
 #   files update & merge with remote folder
@@ -39,7 +40,7 @@ git push                                                            #   next pus
 #   Remote folder CLONE
 #   -------------------
 cd <LOCAL_FOLDER>
-git clone <REMOTE_FOLDER>                                           #   i.e. git@github.com:robertodega/REFS.git
+git clone <REMOTE_FOLDER>                                           #   remote branch link  #    i.e. git@github.com:robertodega/REFS.git
 git branch -M main                                                  #   same name as remote branch name
 git pull origin main                                                #   local-remote content align
 
