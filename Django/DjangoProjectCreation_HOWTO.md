@@ -21,6 +21,8 @@ project activation
     >   $ source venv/bin/activate
     >   (env) $ pip install django
     >   (env) $ pip install djangorestframework
+    >   (env) $ pip install markdown                        # Markdown support for the browsable API.
+    >   (env) $ pip install django-filter                   # Filtering support
     >   (env) $ django-admin startproject folderName .
     >   (env) $ django-admin startapp appName
 
