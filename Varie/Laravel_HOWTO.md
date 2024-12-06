@@ -42,6 +42,42 @@
 
                 <script src="{{ asset('js/custom.js') }}"></script>
 
+        -   definizione di costanti da /opt/lampp/htdocs/WWW/PROJECTS/PHP/Laravel/<LARAVEL_PROJECT_NAME>/.env
+
+                XAMPP_LOCALHOST="localhost"
+                XAMPP_LOCALHOST_EXT="127.0.0.1"
+                LARAVEL_LOCALHOST="127.0.0.1:8000"
+
+        -   creazione di file di configurazione in config/const.php
+
+                return [
+                        'env' => ( ($_SERVER["HTTP_HOST"] !== env('XAMPP_LOCALHOST'))       #   utilizo di costanti da .env
+                                && ($_SERVER["HTTP_HOST"] !== env('XAMPP_LOCALHOST_EXT')) 
+                                && ($_SERVER["HTTP_HOST"] !== env('LARAVEL_LOCALHOST')) ) 
+                                ? 'remote' 
+                                : 'localhost',
+                        'dbConst' => [
+                                'localhost' => [
+                                        'host' => 'localhost',
+                                        'dbname' => 'miodb',
+                                        'user' => 'root',
+                                        'pwd' => ''
+                                ],
+                                'remote' => [
+                                        'host' => '',
+                                        'dbname' => '',
+                                        'user' => '',
+                                        'pwd' => ''
+                                ]
+                        ],
+                ];
+
+        -    utilizzo delle costanti in blade 
+                
+                {{ config('const.dbConst.' . config('const.env') . '.host') }} 
+
+
+
 
 
     
