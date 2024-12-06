@@ -1,6 +1,6 @@
-        -   composer create-project laravel/laravel <LARAVEL_PEOJECT_NAME>
-        -   php artisan --version
-        -   in /opt/lampp/htdocs/WWW/PROJECTS/PHP/Laravel/<LARAVEL_PEOJECT_NAME>/.env
+        -   composer create-project laravel/laravel <LARAVEL_PROJECT_NAME>
+        -   cd <LARAVEL_PROJECT_NAME>
+        -   in /opt/lampp/htdocs/WWW/PROJECTS/PHP/Laravel/<LARAVEL_PROJECT_NAME>/.env
 
                 DB_CONNECTION=mysql
                 DB_HOST=127.0.0.1
@@ -27,18 +27,18 @@
                 0001_01_01_000001_create_cache_table ................................................................................................. 6.61ms DONE
                 0001_01_01_000002_create_jobs_table ................................................................................................. 19.34ms DONE
 
-        -   creazione di <LARAVEL_PEOJECT_NAME>/resources/views/home.blade.php
-        -   link del blade in <LARAVEL_PEOJECT_NAME>/routes/web.php
+        -   creazione di <LARAVEL_PROJECT_NAME>/resources/views/home.blade.php
+        -   link del blade in <LARAVEL_PROJECT_NAME>/routes/web.php
 
                 Route::get('/', function () {
                 return view('home');
                 });
 
-        -   creazione <LARAVEL_PEOJECT_NAME>/public/css/custom.css e link in blade
+        -   creazione <LARAVEL_PROJECT_NAME>/public/css/custom.css e link in blade
 
                 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
-        -   creazione <LARAVEL_PEOJECT_NAME>/public/js/custom.js e link in blade
+        -   creazione <LARAVEL_PROJECT_NAME>/public/js/custom.js e link in blade
 
                 <script src="{{ asset('js/custom.js') }}"></script>
 
