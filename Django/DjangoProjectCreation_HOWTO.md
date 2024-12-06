@@ -21,8 +21,6 @@ project activation
     >   $ source venv/bin/activate
     >   (env) $ pip install django
     >   (env) $ pip install djangorestframework
-    >   (env) $ pip install markdown                        # Markdown support for the browsable API.
-    >   (env) $ pip install django-filter                   # Filtering support
     >   (env) $ django-admin startproject folderName .
     >   (env) $ django-admin startapp appName
 
@@ -93,11 +91,18 @@ LOGOUT_REDIRECT_URL = "main"
     <head>
         <title>Page Title</title>
         <link rel="stylesheet" href="{% static 'css/custom.css'%}" />
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        
     </head>
     <body>
         Page Content
     </body>
 </html>
+
+<script src="{% static 'js/custom.js'%}"></script>
 
 
     >   edit static/css/custom.css
