@@ -11,7 +11,6 @@
 
     -   modifica il file appena creato con le seguenti righe:
 
-    -       [Desktop Entry]
     -       Version=1.0
     -       Type=Application
     -       Name=NomeDelLauncher
