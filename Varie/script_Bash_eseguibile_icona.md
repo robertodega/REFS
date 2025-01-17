@@ -11,15 +11,15 @@
 
     -   modifica il file appena creato con le seguenti righe:
 
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=NomeDelLauncher
-Comment=Descrizione del comando
-Exec=<SCRIPT_PATH>/<SCRIPT_NAME>.sh
-Icon=<SCRIPT_PATH>/<SCRIPT_ICON>.png
-Terminal=true
-Categories=Utility;
+    -       [Desktop Entry]
+    -       Version=1.0
+    -       Type=Application
+    -       Name=NomeDelLauncher
+    -       Comment=Descrizione del comando
+    -       Exec=<SCRIPT_PATH>/<SCRIPT_NAME>.sh
+    -       Icon=<SCRIPT_PATH>/<SCRIPT_ICON>.png
+    -       Terminal=true
+    -       Categories=Utility;
 
     -   Salvare e rendere eseguibile il file con estensione .desktop:
         -   chmod +x <EXEC_SCRIPT_PATH><FILENAME>.desktop
