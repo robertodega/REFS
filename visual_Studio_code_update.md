@@ -1,0 +1,3 @@
+-   code --version
+-   sudo apt update
+-   sudo apt install --only-upgrade code
