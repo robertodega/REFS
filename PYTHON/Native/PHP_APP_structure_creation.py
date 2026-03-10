@@ -27,6 +27,7 @@ file_body_content = {
             \n\t}\
     ",
     "config/config.php":"",
+    "config/const.php":"",
     "classes/dbman.php":"<?php\
             \n\tclass Dbman\
             \n\t{\
@@ -114,6 +115,7 @@ file_body_content = {
     "DB/db.sql":"",
     "index.php":"<?php\
         \nrequire_once __DIR__ . '/config/config.php';\
+        \nrequire_once __DIR__ . '/config/const.php';\
         \nrequire_once __DIR__ . '/inc/functions.php';\
         \nrequire_once __DIR__ . '/classes/dbman.php';\
         \nrequire_once __DIR__ . '/classes/manager.php';\
