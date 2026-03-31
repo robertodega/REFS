@@ -1,7 +1,7 @@
-- mkdir Login
-- cd Login
-- mkdir config classes inc templates css js DB
-- touch index.php logout.php check_session.php .htaccess functions.php config/config.php classes/dbman.php classes/manager.php classes/conn.php css/custom.css js/custom.js templates/loginform.php templates/signinform.php templates/dashboard.php DB/login.sql
+mkdir Login \
+&& cd Login \
+&& mkdir config classes inc templates css js DB \
+&& touch index.php logout.php check_session.php .htaccess functions.php config/config.php classes/dbman.php classes/manager.php classes/conn.php css/custom.css js/custom.js templates/loginform.php templates/signinform.php templates/dashboard.php DB/login.sql
 
 - nano .htaccess
 

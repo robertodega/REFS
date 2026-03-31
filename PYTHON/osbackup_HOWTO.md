@@ -1,6 +1,7 @@
-- mkdir osbackup
-- cd osbackup
-- touch const.py functions.py app.py
+mkdir osbackup \
+&& cd osbackup \
+&& touch const.py functions.py app.py
+
 - nano const.py
 
         rootFolder = "/home/roby/"
