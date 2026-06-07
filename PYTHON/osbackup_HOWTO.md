@@ -9,8 +9,8 @@ mkdir osbackup \
         foldersDebian = ["Documenti", "Immagini", "Musica"]
         foldersUbuntu = ["Documents", "Pictures", "Music"]
         support_disk_list = ["1", "2", "0"]
-        support_disk_dict = {"1": "TOSHIBA", "2": "Hamlet"}
-        support_disk_limit = {"TOSHIBA": 3, "Hamlet": 1}
+        support_disk_dict = {"1": "TOSHIBA", "2": "UNIONSINE"}
+        support_disk_limit = {"TOSHIBA": 3, "UNIONSINE": 1}
         thunderbirdDebianPath = "/home/roby/.thunderbird/"
         thunderbirdUbuntuPath = "/home/roby/.var/app/org.mozilla.Thunderbird/.thunderbird"
         wwwPath = "/opt/lampp/htdocs/WWW/"
@@ -20,7 +20,7 @@ mkdir osbackup \
         header = separator + title + separator
         goodbyeLabel = "\n\nThank you and goodbye!\n\n"
         supportChoiceLabel = (
-            "\n\nChoose your disk ( 0 to exit ):\n\n\t1\tTOSHIBA\n\t2\tHamlet\n\n\t> "
+            "\n\nChoose your disk ( 0 to exit ):\n\n\t1\tTOSHIBA\n\t2\tUNIONSINE\n\n\t> "
         )
 
 
