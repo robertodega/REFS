@@ -22,15 +22,15 @@
         - KVM is active
         
                 docker run -d \
-                  --name windows11-custom \
+                  --name windows10 \
                   --net host \
                   -v "$(pwd)":/data \
                   docker.io/tianon/qemu \
                   qemu-system-x86_64 \
                     -m 4G \
                     -smp 2 \
-                    -drive file=/data/win11-disk.qcow2,if=ide,format=qcow2 \
-                    -cdrom /data/windows11.iso \
+                    -drive file=/data/win10-disk.qcow2,if=ide,format=qcow2 \
+                    -cdrom /data/windows10.iso \
                     -vnc :0
 
         - KVM is NOT active
