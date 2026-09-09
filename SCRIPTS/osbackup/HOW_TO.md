@@ -1,3 +1,3 @@
 - python3 -m venv .venv
-- source .venv/bn/activate
+- source .venv/bin/activate
 - python3 app.py
