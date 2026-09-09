@@ -207,25 +207,24 @@ def get_db():
         db.close()
 '''
 
-BACKEND_MODELS = '''"""Modelli SQLAlchemy: definiscono le tabelle del database."""
-
-from datetime import datetime
-
+BACKEND_MODELS = """from datetime import datetime, timezone
 from sqlalchemy import Column, DateTime, Integer, String
-
 from .database import Base
 
 
-class Item(Base):
-    """Tabella di esempio: un semplice elenco di elementi con nome e descrizione."""
+def utcnow():
+    return datetime.now(timezone.utc)
 
+
+class Item(Base):
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False, index=True)
     description = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-'''
+    created_at = Column(DateTime(timezone=True), default=utcnow)
+
+"""
 
 BACKEND_SCHEMAS = '''"""Schemi Pydantic: validano le richieste in ingresso e serializzano le risposte."""
 
@@ -253,6 +252,106 @@ class ItemRead(ItemBase):
     id: int
     created_at: datetime
 '''
+
+SQLITE_FASTAPI_CACHEDB_MANAGER = """import sqlite3
+import os
+import subprocess
+from pathlib import Path
+
+DB_PATH = Path(__file__).resolve().parent / "app.db"
+
+introMmsg = '\\n\\n\\t============================== fastapi Sqlite management script ==============================\\n\\n'
+choiceMmsg = '\\n\\n\\tSelect Action:\\n\\n\\t1: Drop\\n\\t2: Truncate\\n\\t0: Exit\\n\\n\\t'
+exitMsg = '\\n\\n\\t========================================= Thank you! =========================================\\n\\n'
+canProceed = False
+
+
+# def clear_screen():
+#     os.system("cls" if os.name == 'nt' else "clear")
+
+
+def clear_screen():
+    if os.name == 'nt':
+        subprocess.run(["cmd", "/c", "cls"], check=False)
+    else:
+        subprocess.run(["clear"], check=False)
+
+
+while True:
+    clear_screen()
+
+    action = (
+        input(f"{introMmsg}{choiceMmsg}")
+        .strip()
+        .lower()
+    )
+
+    if action in ("1", "2", "0"):
+
+        if action == '1':
+            commandName = 'DROP'
+            commandValue = 'DROP TABLE IF EXISTS'
+            actionEffect = 'DROPPED'
+        elif action == '2':
+            commandName = 'TRUNCATE'
+            commandValue = 'DELETE FROM'
+            actionEffect = 'TRUNCATED'
+        elif action == '0':
+            print(exitMsg)
+            exit(0)
+        else:
+            print("Action is not valid")
+            exit(1)
+
+        if action != '0':
+
+            conn = sqlite3.connect(f"{DB_PATH}")
+            cur = conn.cursor()
+
+            tables = [
+                r[0]
+                for r in cur.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table'"
+                )
+            ]
+
+            print(
+                f"\\nSelect Table Name to {commandName}:\\n\\n\\t\\n\\n\\tAvailable tables are:\\n\\n"
+            )
+            for t in tables:
+                print(f"\\t\\t{t}\\n")
+
+            tableName = input(f"\\nTable Name:\\n\\n\\t").strip()
+
+            for t in tables:
+                if t == tableName:
+                    canProceed = True
+                    break
+
+            if canProceed:
+                print(f"\\n\\n\\t\\t> {commandValue} {tableName} ... ", end="")
+                cur.execute(f'{commandValue} "{t}"')
+                print(f"DONE")
+
+                if action == '2':
+                    try:
+                        print(f"\\n\\n\\t\\t> Deleting from sqlite_sequence ... ", end="")
+                        cur.execute("DELETE FROM sqlite_sequence")
+                        print(f"DONE")
+                    except sqlite3.OperationalError:
+                        pass
+
+                conn.commit()
+                conn.close()
+
+                print(f"\\n\\n\\tTable {tableName} has been {actionEffect}\\n\\n")
+            else:
+                print(f"\\n\\n\\n\\tTable {tableName} is not a valid table name\\n\\n")
+
+        break
+
+print(exitMsg)
+"""
 
 BACKEND_MAIN = '''"""Punto di ingresso dell'applicazione FastAPI."""
 
@@ -918,6 +1017,7 @@ def generate(app_name: str, target_dir: Path) -> Path:
         "backend/app/database.py": BACKEND_DATABASE,
         "backend/app/models.py": BACKEND_MODELS,
         "backend/app/schemas.py": BACKEND_SCHEMAS,
+        "backend/sqlite_db_manager.py": SQLITE_FASTAPI_CACHEDB_MANAGER,
         "backend/app/main.py": BACKEND_MAIN,
         "frontend/package.json": FRONTEND_PACKAGE_JSON,
         "frontend/angular.json": FRONTEND_ANGULAR_JSON,
@@ -979,36 +1079,11 @@ def setup_and_start(project_root: Path) -> None:
 
 
 def main() -> None:
-    # parser = argparse.ArgumentParser(
-    #     description="Genera la struttura iniziale di un'app Angular + FastAPI."
-    # )
-    # parser.add_argument(
-    #     "nome", nargs="?", default="my-app", help="Nome del progetto (default: my-app)"
-    # )
-    # parser.add_argument(
-    #     "--dir",
-    #     dest="target_dir",
-    #     default=".",
-    #     help="Cartella in cui creare il progetto (default: cartella corrente)",
-    # )
-    # parser.add_argument(
-    #     "--no-setup",
-    #     action="store_true",
-    #     help="Genera solo i file, senza installare le dipendenze ne' avviare l'app automaticamente",
-    # )
-    # args = parser.parse_args()
-
-    # target_dir = Path(args.target_dir).resolve()
-    # target_dir.mkdir(parents=True, exist_ok=True)
-
-    # project_root = generate(args.nome, target_dir)
-
     # # project_name from command line
     # parser = argparse.ArgumentParser(description="Genera la struttura iniziale di un'app Angular + FastAPI.")
     # parser.add_argument("nome", nargs="?", default="my-app", help="Nome del progetto (default: my-app)")
     # parser.add_argument("--dir", dest="target_dir", default=".", help="Cartella in cui creare il progetto (default: cartella corrente)")
     # args = parser.parse_args()
-
     # target_dir = Path(args.target_dir).resolve()
     # project_name = args.nome
 
@@ -1018,6 +1093,12 @@ def main() -> None:
 
     target_dir.mkdir(parents=True, exist_ok=True)
     project_root = generate(project_name, target_dir)
+
+    activate_hint = (
+        "venv\\Scripts\\activate"
+        if sys.platform.startswith("win")
+        else "source venv/bin/activate"
+    )
 
     # Esecuzione automatica installazione
     try:
@@ -1036,20 +1117,6 @@ def main() -> None:
             f"\nComando non trovato: {e}. Verifica che Python, pip e npm siano installati e nel PATH."
         )
         sys.exit(1)
-
-    # Descrizione passaggi installazione
-    activate_hint = (
-        "venv\\Scripts\\activate"
-        if sys.platform.startswith("win")
-        else "source venv/bin/activate"
-    )
-    print(f"Progetto creato in: {project_root}\n")
-    print("Operazioni eseguite:")
-    print(
-        f"  cd {project_root.name}/backend && python3 -m venv venv && {activate_hint} && pip3 install -r requirements.txt"
-    )
-    print(f"  cd {project_root.name}/frontend && npm install")
-    print(f"  cd {project_root.name} && python start.py")
 
 
 if __name__ == "__main__":
