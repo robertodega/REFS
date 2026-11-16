@@ -1,6 +1,6 @@
 utils_tbl = "utils"
-db_user = "dbadmin"
-db_pwd = "la_C1cc0l1n4_9"
+db_user = "***********"
+db_pwd = "***********"
 separator = 40 * "*"
 title = " PYTHON Search Utility finctionality "
 welcomeLabel = "\n\tWelcome User!"
